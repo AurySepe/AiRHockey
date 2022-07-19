@@ -23,6 +23,6 @@ class Piattino : Entity, HasPhysics,HasCollision,HasAnchoring,HasModel,IsMovable
         }
     
     required init() {
-        print("errore")
+        super.init()
     }
 }

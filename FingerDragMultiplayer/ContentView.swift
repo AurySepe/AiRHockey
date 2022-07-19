@@ -7,12 +7,13 @@
 
 import SwiftUI
 import RealityKit
-
+import MultipeerConnectivity
 
 struct ContentView : View {
     
     @EnvironmentObject var game : Gioco
     @EnvironmentObject var pointTracker : PointsViewModel
+//    let nearbyService = NearbyService(serviceType: "gt-airhockey")
     var body: some View {
         ZStack
         {
@@ -27,10 +28,20 @@ struct ContentView : View {
     }
 }
 
+extension ContentView : NearbyServiceDelegate
+{
+    func didReceive(msg: String)
+    {
+        print(msg)
+    }
+
+}
+
 struct ARViewContainer: UIViewRepresentable {
     
     @EnvironmentObject var game : Gioco
     @EnvironmentObject var pointTracker : PointsViewModel
+    let nearbyService : NearbyService = NearbyService()
     
     func makeUIView(context: Context) -> ARView {
         GoalComponent.registerComponent()
@@ -41,6 +52,9 @@ struct ARViewContainer: UIViewRepresentable {
         arView.debugOptions.update(with: .showPhysics)
         
         arView.scene.anchors.append(arena)
+//        arView.scene.synchronizationService = try?
+//        MultipeerConnectivityService(session: nearbyService.session )
+        
 
 ////        game.prova = arView.scene.subscribe(to: SceneEvents.Update.self) { event in
 ////            timer += Float(event.deltaTime)

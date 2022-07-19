@@ -12,6 +12,8 @@
 		E75D7ABA2884191600E5A226 /* Pavimento.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D7AB92884191600E5A226 /* Pavimento.swift */; };
 		E75D7ABC288419A100E5A226 /* Arena.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D7ABB288419A100E5A226 /* Arena.swift */; };
 		E75D7ABE2884590600E5A226 /* IsBounceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D7ABD2884590600E5A226 /* IsBounceable.swift */; };
+		E75D7AC12886960300E5A226 /* NearbyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D7ABF2886960300E5A226 /* NearbyService.swift */; };
+		E75D7AC22886960300E5A226 /* NearbyServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D7AC02886960300E5A226 /* NearbyServiceDelegate.swift */; };
 		E7AE303E287FF8BA00DA66D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE303D287FF8BA00DA66D8 /* AppDelegate.swift */; };
 		E7AE3040287FF8BA00DA66D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE303F287FF8BA00DA66D8 /* ContentView.swift */; };
 		E7AE3044287FF8BB00DA66D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7AE3043287FF8BB00DA66D8 /* Assets.xcassets */; };
@@ -53,6 +55,9 @@
 		E75D7AB92884191600E5A226 /* Pavimento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pavimento.swift; sourceTree = "<group>"; };
 		E75D7ABB288419A100E5A226 /* Arena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arena.swift; sourceTree = "<group>"; };
 		E75D7ABD2884590600E5A226 /* IsBounceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsBounceable.swift; sourceTree = "<group>"; };
+		E75D7ABF2886960300E5A226 /* NearbyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyService.swift; sourceTree = "<group>"; };
+		E75D7AC02886960300E5A226 /* NearbyServiceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyServiceDelegate.swift; sourceTree = "<group>"; };
+		E75D7AC32886BFED00E5A226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E7AE303A287FF8BA00DA66D8 /* FingerDragMultiplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FingerDragMultiplayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7AE303D287FF8BA00DA66D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7AE303F287FF8BA00DA66D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,12 +143,15 @@
 		E7AE303C287FF8BA00DA66D8 /* FingerDragMultiplayer */ = {
 			isa = PBXGroup;
 			children = (
+				E75D7AC32886BFED00E5A226 /* Info.plist */,
 				E7AE303D287FF8BA00DA66D8 /* AppDelegate.swift */,
 				E7AE303F287FF8BA00DA66D8 /* ContentView.swift */,
 				E7AE3069287FF97800DA66D8 /* disco.rcproject */,
 				E7AE3043287FF8BB00DA66D8 /* Assets.xcassets */,
 				E7AE3045287FF8BB00DA66D8 /* Preview Content */,
 				E7AE306C288007E100DA66D8 /* Gioco.swift */,
+				E75D7ABF2886960300E5A226 /* NearbyService.swift */,
+				E75D7AC02886960300E5A226 /* NearbyServiceDelegate.swift */,
 			);
 			path = FingerDragMultiplayer;
 			sourceTree = "<group>";
@@ -324,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7AE307B288156C600DA66D8 /* IsRestricted.swift in Sources */,
+				E75D7AC22886960300E5A226 /* NearbyServiceDelegate.swift in Sources */,
 				E7AE30752880678F00DA66D8 /* Dischetto.swift in Sources */,
 				E75D7ABC288419A100E5A226 /* Arena.swift in Sources */,
 				E7AE307328804A2F00DA66D8 /* IsGoal.swift in Sources */,
@@ -339,6 +348,7 @@
 				E75D7ABA2884191600E5A226 /* Pavimento.swift in Sources */,
 				E7AE30702880299B00DA66D8 /* Goal.swift in Sources */,
 				E7AE306D288007E100DA66D8 /* Gioco.swift in Sources */,
+				E75D7AC12886960300E5A226 /* NearbyService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +510,9 @@
 				DEVELOPMENT_TEAM = CAAT2TQW55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FingerDragMultiplayer/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "ci serve per trovare i giocatori";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -531,7 +543,9 @@
 				DEVELOPMENT_TEAM = CAAT2TQW55;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FingerDragMultiplayer/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "ci serve per trovare i giocatori";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;

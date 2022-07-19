@@ -39,7 +39,7 @@ class Arena : Entity,HasAnchoring
     }
     
     required init() {
-        fatalError("init() has not been implemented")
+        super.init()
     }
     
     func activateChildren()
