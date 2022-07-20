@@ -18,15 +18,15 @@ class Arena : Entity,HasAnchoring
     var goals : [GoalEntity] = []
     var nearbyService : NearbyService?
     
-    required convenience init(transformComponent : Transform,movableComponent : MovableComponent,size : SIMD3<Float>,isHost : Bool,nearbyService : NearbyService) {
+    required convenience init(transformComponent : Transform,movableComponent : MovableComponent,size : SIMD3<Float>,isHost : Bool,nearbyService : NearbyService,pointTracker : PointsViewModel) {
         
-        self.init(movableComponent: movableComponent,size:size,isHost: isHost,nearbyService : nearbyService)
+        self.init(movableComponent: movableComponent,size:size,isHost: isHost,nearbyService : nearbyService,pointTracker : pointTracker)
         self.transform = transformComponent
         
         
     }
     
-    required init(movableComponent : MovableComponent,size : SIMD3<Float>,isHost : Bool,nearbyService : NearbyService) {
+    required init(movableComponent : MovableComponent,size : SIMD3<Float>,isHost : Bool,nearbyService : NearbyService,pointTracker : PointsViewModel) {
         self.size = size
         self.nearbyService = nearbyService
         super.init()
@@ -38,7 +38,7 @@ class Arena : Entity,HasAnchoring
         if isHost{
             self.piattini.append(createPiattino(movableComponent: movableComponent))
             self.children.append(dischetto)
-            self.goals = createGoals()
+            self.goals = createGoals(pointTracker : pointTracker)
             self.children.append(contentsOf: self.goals)
         }
         else{
@@ -57,30 +57,38 @@ class Arena : Entity,HasAnchoring
         for piattino in piattini {
             piattino.installMovement()
             piattino.addRestriction()
-            piattino.addPlayOnCollision()
+            piattino.addHitSound()
         }
         for wall in walls
         {
             wall.addBounce()
-            wall.addPlayOnCollision()
+            wall.addHitSound()
         }
         for goal in goals
         {
-            goal.addCollisions()
+            goal.addGoalEvent()
+            
         }
 //        self.dischetto.addForce(.init(x: 50, y: 0, z: 0), relativeTo: self)
     }
     
     func createWalls() -> [Wall]
     {
-        var wall : [Wall] = []
+        var walls : [Wall] = []
         for i in 0..<wallRotation.count
         {
+            let transform = Transform(scale: .one, rotation: wallRotation[i], translation: wallPosition[i])
+            let bounceComponent = BounceComponent(directionOfBounce: wallBounceDirection[i])
+            let audioComponent = AudioComponent(resource: [AudioResources.collisionSound])
+            let networkComponent = NetworkComponent(networkDelegate: nearbyService!)
+            let hitSoundComponent = HitSoundComponent()
             
-            wall.append(Wall(transformComponent: Transform(scale: .one, rotation: wallRotation[i], translation: wallPosition[i]), size: wallSize[i], bounceComponent: .init(directionOfBounce: wallBounceDirection[i]),audioComponent: .init(resource: AudioResources.collisionSound)))
+            let wall = Wall(transformComponent: transform, size: wallSize[i], bounceComponent:bounceComponent ,audioComponent: audioComponent,network: networkComponent,hitSound: hitSoundComponent)
+            
+            walls.append(wall)
         }
         
-        return wall
+        return walls
     }
     
     func createPavimento() -> Pavimento
@@ -90,12 +98,31 @@ class Arena : Entity,HasAnchoring
     
     func createPiattino(movableComponent: MovableComponent) -> Piattino
     {
-        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x: -pavimentoSize.z/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: 0))),audioComponent: .init(resource: AudioResources.collisionSound))
+        let modelComponent = ModelComponent(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)])
+        let transform = Transform(scale: .one , rotation: .init(), translation: piattinoPosition)
+        let restrictionComponent = RestrictionComponent(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x: -pavimentoSize.z/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: 0)))
+        let audioComponent = AudioComponent(resource: [AudioResources.collisionSound])
+        let networkComponent = NetworkComponent(networkDelegate: nearbyService!)
+        let hitSoundComponent = HitSoundComponent()
+        
+        let piattino = Piattino(modelComponent: modelComponent, movableComponent: movableComponent, tranform: transform,restrictionComponent: restrictionComponent,audioComponent: audioComponent,network: networkComponent,hitSound: hitSoundComponent)
+        
+        return piattino
     }
     
     func createPiattinoClient(movableComponent: MovableComponent) -> Piattino
     {
-        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition * SIMD3(x: 1, y: 1, z: -1)),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x:0, y:pavimentoSize.z/2 - wallSize[0].z - radiusPiattino + radiusDischetto))),audioComponent: .init(resource: AudioResources.collisionSound))
+        
+        let modelComponent = ModelComponent(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)])
+        let transform = Transform(scale: .one , rotation: .init(), translation: piattinoPosition * SIMD3<Float>(x: 1, y: 1, z: -1))
+        let restrictionComponent = RestrictionComponent(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x:0, y:pavimentoSize.z/2 - wallSize[0].z - radiusPiattino + radiusDischetto)))
+        let audioComponent = AudioComponent(resource: [AudioResources.collisionSound])
+        let networkComponent = NetworkComponent(networkDelegate: nearbyService!)
+        let hitSoundComponent = HitSoundComponent()
+        
+        let piattino = Piattino(modelComponent: modelComponent, movableComponent: movableComponent, tranform: transform,restrictionComponent: restrictionComponent,audioComponent: audioComponent,network: networkComponent,hitSound: hitSoundComponent)
+        
+        return piattino
     }
     
     func createDisco() -> Dischetto
@@ -103,13 +130,18 @@ class Arena : Entity,HasAnchoring
         return Dischetto(modelComponent: .init(mesh: .generateSphere(radius: radiusDischetto), materials: [SimpleMaterial(color: .red, isMetallic: false)]),transform: .init(scale: .one, rotation: .init(), translation: dischettoPosition))
     }
     
-    func createGoals() -> [GoalEntity]
+    func createGoals(pointTracker : PointsViewModel) -> [GoalEntity]
     {
         var result : [GoalEntity] = []
         var i = 1
         for position in goalPosition
         {
-            let goal = GoalEntity(goalComponent: .init( nearbyService : nearbyService!,player: i , arena: self,audioResource: AudioResources.goalSound), mesh: .generateBox(size: goalSize), transform: .init(scale: .one, rotation: .init(), translation: position))
+            let goalComponent = GoalComponent(pointTracker: pointTracker, player: i, arena: self)
+            let transform = Transform(scale: .one, rotation: .init(), translation: position)
+            let audio = AudioComponent(resource: [AudioResources.collisionSound])
+            let network = NetworkComponent(networkDelegate: nearbyService!)
+            
+            let goal = GoalEntity(goalComponent: goalComponent, mesh: .generateBox(size: goalSize), transform: transform,audio: audio,network: network)
             result.append(goal)
             i += 1
         }

@@ -10,14 +10,13 @@ import MultipeerConnectivity
 
 class NearbyService: NSObject, ObservableObject {
     
-    var nearbyServideDelegate : NearbyServiceDelegate?
+    var nearbyServiceDelegate : NearbyServiceDelegate?
     private var serviceType = "gt-nearby"
     @Published var peersFound : [String : IdentifiablePeer] = [:]
     @Published var isConnected : Bool = false
     @Published var isHost : Bool = false
     @Published var isClient : Bool = false
-    @Published var punteggio1 : Int = 0
-    @Published var punteggio2 : Int = 0
+    var delegateDict : [String : NearbyServiceDelegate]
     private var clientId : MCPeerID?
     
     private let peerID = MCPeerID( displayName: UIDevice.current.name)
@@ -37,11 +36,12 @@ class NearbyService: NSObject, ObservableObject {
     override init() {
         nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         nearbyServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
+        delegateDict = [:]
         super.init()
         nearbyServiceAdvertiser.delegate = self
         
         nearbyServiceBrowser.delegate = self
-        nearbyServideDelegate = self
+        nearbyServiceDelegate = self
         
     }
     
@@ -49,6 +49,12 @@ class NearbyService: NSObject, ObservableObject {
         self.init()
         self.serviceType = serviceType
     }
+    
+    convenience init(delegateDict : [String : NearbyServiceDelegate]){
+        self.init()
+        self.delegateDict = delegateDict
+    }
+    
     
     deinit{
         nearbyServiceAdvertiser.stopAdvertisingPeer()
@@ -82,6 +88,9 @@ class NearbyService: NSObject, ObservableObject {
         isHost = true
         isConnected = true
     }
+    
+    static var POINTDELEGATE = "POINTS"
+    static var AUDIODELEGATE = "AUDIO"
 }
 
 extension NearbyService: MCSessionDelegate {
@@ -103,8 +112,13 @@ extension NearbyService: MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("did receive data: \(data)")
         if let msg = String(data: data, encoding: .utf8) {
+            let prefixMessage = msg.split(separator: "#")
+            print(msg)
+            let prefix = String(prefixMessage[0])
+            let message = String(prefixMessage[1])
+            let delegate = self.delegateDict[prefix]
             DispatchQueue.main.async {
-                self.nearbyServideDelegate?.didReceive(msg: msg)
+                delegate?.didReceive(msg: message)
             
             }
         }
@@ -154,9 +168,9 @@ extension NearbyService : NearbyServiceDelegate
 {
     func didReceive(msg: String) {
         print(msg)
-        let numeriStringati = msg.split(separator: ",")
-        self.punteggio1 = Int(numeriStringati[0])!
-        self.punteggio2 = Int(numeriStringati[1])!
+//        let numeriStringati = msg.split(separator: ",")
+//        self.punteggio1 = Int(numeriStringati[0])!
+//        self.punteggio2 = Int(numeriStringati[1])!
     }
 }
 

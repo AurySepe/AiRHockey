@@ -12,6 +12,7 @@ import MultipeerConnectivity
 struct ContentView : View {
     
     @EnvironmentObject var nearbyService : NearbyService
+    @EnvironmentObject var pointTracker : PointsViewModel
     var body: some View {
         
         if nearbyService.isConnected
@@ -22,7 +23,7 @@ struct ContentView : View {
                 VStack
                 {
                     Spacer()
-                    Text("Giocatore1 : \(nearbyService.punteggio1), Giocatore2 : \(nearbyService.punteggio2)")
+                    Text("Giocatore1 : \(pointTracker.punteggioGiocatore1), Giocatore2 : \(pointTracker.punteggioGiocatore2)")
                 }
             }
             
@@ -38,12 +39,13 @@ struct ContentView : View {
 struct ARViewContainer: UIViewRepresentable {
     
     @EnvironmentObject var nearbyService : NearbyService
+    @EnvironmentObject var pointTracker : PointsViewModel
     
     func makeUIView(context: Context) -> ARView {
         GoalComponent.registerComponent()
         
         let arView = ARView(frame: .zero)
-        let arena = Arena(transformComponent: .init(scale: .one, rotation: .init(), translation: .init(x: 0, y: 0, z: 0)), movableComponent: .init(view: arView),size: .init(x: 0.3, y: 0.1, z: 0.6),isHost: nearbyService.isHost,nearbyService: nearbyService)
+        let arena = Arena(transformComponent: .init(scale: .one, rotation: .init(), translation: .init(x: 0, y: 0, z: 0)), movableComponent: .init(view: arView),size: .init(x: 0.3, y: 0.1, z: 0.6),isHost: nearbyService.isHost,nearbyService: nearbyService,pointTracker : pointTracker)
 
         arView.debugOptions.update(with: .showPhysics)
 

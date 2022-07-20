@@ -10,10 +10,10 @@ import RealityKit
 import SwiftUI
 import Combine
 
-class GoalEntity : Entity, HasModel, HasAnchoring, HasCollision,IsGoal{
+class GoalEntity : Entity, HasModel, HasAnchoring, HasCollision,IsGoal, HasAudio,HasNetwork{
     
     
-    required init(goalComponent : GoalComponent,mesh : MeshResource,transform : Transform) {
+    required init(goalComponent : GoalComponent,mesh : MeshResource,transform : Transform,audio : AudioComponent,network : NetworkComponent) {
             super.init()
             
         self.components[CollisionComponent.self] = CollisionComponent(
@@ -30,6 +30,8 @@ class GoalEntity : Entity, HasModel, HasAnchoring, HasCollision,IsGoal{
                 ]
             )
         self.components[GoalComponent.self] = goalComponent
+        self.audio = audio
+        self.network = network
         self.transform = transform
         }
     

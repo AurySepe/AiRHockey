@@ -15,9 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let pointTracker = PointsViewModel()
+        let nearbyService = NearbyService()
+        let pointDelegate = PointDelegate(session: nearbyService.session, pointTracker: pointTracker)
+        nearbyService.delegateDict = [NearbyService.POINTDELEGATE : pointDelegate]
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView().environmentObject(PointsViewModel()).environmentObject(NearbyService()).environmentObject(PointsViewModel())
+        let contentView = ContentView().environmentObject(PointsViewModel()).environmentObject(NearbyService())
 
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)

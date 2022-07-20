@@ -11,8 +11,7 @@ import Combine
 
 struct AudioComponent : Component
 {
-    var resource : AudioResource
-    var audioSubscription : Cancellable?
+    var resource : [AudioResource]
 
 }
 
@@ -28,26 +27,4 @@ extension HasAudio
     
     
 }
-
-extension HasAudio
-{
-    func addPlayOnCollision(){
-        
-        guard let scene = self.scene, let audio = self.audio else {
-            return
-        }
-        
-        
-        self.audio?.audioSubscription = scene.subscribe(to: CollisionEvents.Began.self, on: self) { event in
-            guard let entitaSbattuta = event.entityB as? HasPhysics else {return}
-            if entitaSbattuta.physicsBody?.mode == .dynamic
-            {
-                let _ : AudioPlaybackController = self.playAudio(audio.resource)
-            }
-            
-        }
-        
-    }
-}
-
 

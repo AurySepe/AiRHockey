@@ -38,6 +38,9 @@
 		E7DD988B288818BF005527A9 /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DD988A288818BF005527A9 /* hit.wav */; };
 		E7DD988D28881B64005527A9 /* goal.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DD988C28881B64005527A9 /* goal.wav */; };
 		E7DD989028883CFC005527A9 /* AudioResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD988F28883CFC005527A9 /* AudioResources.swift */; };
+		E7DD989228884107005527A9 /* HasNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD989128884107005527A9 /* HasNetwork.swift */; };
+		E7DD9896288845F9005527A9 /* HasHitSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD9895288845F9005527A9 /* HasHitSound.swift */; };
+		E7DD989828884F1D005527A9 /* PointDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD989728884F1D005527A9 /* PointDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,9 @@
 		E7DD988A288818BF005527A9 /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
 		E7DD988C28881B64005527A9 /* goal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = goal.wav; sourceTree = "<group>"; };
 		E7DD988F28883CFC005527A9 /* AudioResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResources.swift; sourceTree = "<group>"; };
+		E7DD989128884107005527A9 /* HasNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasNetwork.swift; sourceTree = "<group>"; };
+		E7DD9895288845F9005527A9 /* HasHitSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasHitSound.swift; sourceTree = "<group>"; };
+		E7DD989728884F1D005527A9 /* PointDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,7 @@
 		E7AE3031287FF8BA00DA66D8 = {
 			isa = PBXGroup;
 			children = (
+				E7DD989328884199005527A9 /* Network */,
 				E7DD988E28883CEC005527A9 /* Utility */,
 				E7DD988C28881B64005527A9 /* goal.wav */,
 				E7DD988A288818BF005527A9 /* hit.wav */,
@@ -169,9 +176,6 @@
 				E7AE3069287FF97800DA66D8 /* disco.rcproject */,
 				E7AE3043287FF8BB00DA66D8 /* Assets.xcassets */,
 				E7AE3045287FF8BB00DA66D8 /* Preview Content */,
-				E75D7ABF2886960300E5A226 /* NearbyService.swift */,
-				E75D7AC02886960300E5A226 /* NearbyServiceDelegate.swift */,
-				E75D7AFA2886F1BC00E5A226 /* identifiablePeer.swift */,
 			);
 			path = FingerDragMultiplayer;
 			sourceTree = "<group>";
@@ -218,6 +222,8 @@
 				E7AE307A288156C600DA66D8 /* IsRestricted.swift */,
 				E75D7ABD2884590600E5A226 /* IsBounceable.swift */,
 				E7DD98882888127C005527A9 /* HasAudio.swift */,
+				E7DD989128884107005527A9 /* HasNetwork.swift */,
+				E7DD9895288845F9005527A9 /* HasHitSound.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -239,6 +245,17 @@
 				E7DD988F28883CFC005527A9 /* AudioResources.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		E7DD989328884199005527A9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E75D7ABF2886960300E5A226 /* NearbyService.swift */,
+				E75D7AC02886960300E5A226 /* NearbyServiceDelegate.swift */,
+				E75D7AFA2886F1BC00E5A226 /* identifiablePeer.swift */,
+				E7DD989728884F1D005527A9 /* PointDelegate.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +394,7 @@
 				E7AE307B288156C600DA66D8 /* IsRestricted.swift in Sources */,
 				E75D7AC22886960300E5A226 /* NearbyServiceDelegate.swift in Sources */,
 				E7AE30752880678F00DA66D8 /* Dischetto.swift in Sources */,
+				E7DD989828884F1D005527A9 /* PointDelegate.swift in Sources */,
 				E75D7ABC288419A100E5A226 /* Arena.swift in Sources */,
 				E7DD988528874891005527A9 /* PeerView.swift in Sources */,
 				E7AE307328804A2F00DA66D8 /* IsGoal.swift in Sources */,
@@ -391,6 +409,8 @@
 				E7AE307D2881587D00DA66D8 /* FixedEntity.swift in Sources */,
 				E7AE3077288068D000DA66D8 /* IsMovable.swift in Sources */,
 				E7AE306A287FF97800DA66D8 /* disco.rcproject in Sources */,
+				E7DD9896288845F9005527A9 /* HasHitSound.swift in Sources */,
+				E7DD989228884107005527A9 /* HasNetwork.swift in Sources */,
 				E7DD98892888127C005527A9 /* HasAudio.swift in Sources */,
 				E75D7ABA2884191600E5A226 /* Pavimento.swift in Sources */,
 				E7AE30702880299B00DA66D8 /* Goal.swift in Sources */,
