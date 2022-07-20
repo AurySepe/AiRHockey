@@ -21,6 +21,7 @@ class Wall: Entity, HasCollision,HasModel,HasAnchoring,IsBounceable
         self.transform = transformComponent
 //        self.physicsMotion = .init()
         self.bounce = bounceComponent
+        self.synchronization = nil
         
     }
     

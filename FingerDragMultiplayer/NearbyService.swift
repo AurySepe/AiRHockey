@@ -8,10 +8,15 @@
 import Foundation
 import MultipeerConnectivity
 
-class NearbyService: NSObject {
+class NearbyService: NSObject, ObservableObject {
     
     var nearbyServideDelegate : NearbyServiceDelegate?
     private var serviceType = "gt-nearby"
+    @Published var peersFound : [String : IdentifiablePeer] = [:]
+    @Published var isConnected : Bool = false
+    @Published var isHost : Bool = false
+    @Published var isClient : Bool = false
+    private var clientId : MCPeerID?
     
     private let peerID = MCPeerID( displayName: UIDevice.current.name)
     private let nearbyServiceAdvertiser : MCNearbyServiceAdvertiser
@@ -32,12 +37,9 @@ class NearbyService: NSObject {
         nearbyServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         super.init()
         nearbyServiceAdvertiser.delegate = self
-        nearbyServiceAdvertiser.startAdvertisingPeer()
-        print("\(peerID.displayName) started advertising peer...")
         
         nearbyServiceBrowser.delegate = self
-        nearbyServiceBrowser.startBrowsingForPeers()
-        print("\(peerID.displayName) started browsing for peers...")
+        
     }
     
     convenience init(serviceType : String){
@@ -55,6 +57,28 @@ class NearbyService: NSObject {
             try? session.send(data, toPeers: session.connectedPeers, with: .reliable)
         }
     }
+    
+    func enterHostGame(host : MCPeerID)
+    {
+        nearbyServiceBrowser.invitePeer(host, to: session, withContext: nil, timeout: 10)
+        isConnected = true
+        isClient = true
+    }
+    
+    func beginBrowsing()
+    {
+        peersFound = [:]
+        nearbyServiceBrowser.startBrowsingForPeers()
+        print("\(peerID.displayName) started browsing for peers...")
+    }
+    
+    func beginHosting()
+    {
+        nearbyServiceAdvertiser.startAdvertisingPeer()
+        print("\(peerID.displayName) started advertising peer...")
+        isHost = true
+        isConnected = true
+    }
 }
 
 extension NearbyService: MCSessionDelegate {
@@ -66,6 +90,7 @@ extension NearbyService: MCSessionDelegate {
             print("connected: \(peerID.displayName)")
         case .notConnected :
             print("not connected: \(peerID.displayName)")
+            
         @unknown default:
             print("unknown state: \(state)")
             
@@ -94,7 +119,14 @@ extension NearbyService: MCSessionDelegate {
 
 extension NearbyService: MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        invitationHandler(true, session)
+        if clientId == nil{
+            invitationHandler(true, session)
+            clientId = peerID
+            advertiser.stopAdvertisingPeer()
+        }else{
+            print("già connesso con un client")
+        }
+        
     
     }
 }
@@ -102,12 +134,13 @@ extension NearbyService: MCNearbyServiceAdvertiserDelegate {
 extension NearbyService: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         
-        browser.invitePeer(peerID, to: session, withContext: nil, timeout: 60)
+        peersFound[peerID.displayName] = IdentifiablePeer(peer: peerID)
+//        browser.invitePeer(peerID, to: session, withContext: nil, timeout: 60)
 		
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        print("lost peer: \(peerID.displayName) ")
+        peersFound.removeValue(forKey: peerID.displayName)
     }
     
         

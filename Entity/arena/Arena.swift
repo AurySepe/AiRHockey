@@ -16,15 +16,15 @@ class Arena : Entity,HasAnchoring
     var piattini : [Piattino] = []
     var pavimento : Pavimento = Pavimento()
     
-    required convenience init(transformComponent : Transform,movableComponent : MovableComponent,size : SIMD3<Float>) {
+    required convenience init(transformComponent : Transform,movableComponent : MovableComponent,size : SIMD3<Float>,isHost : Bool) {
         
-        self.init(movableComponent: movableComponent,size:size)
+        self.init(movableComponent: movableComponent,size:size,isHost: isHost)
         self.transform = transformComponent
         
         
     }
     
-    required init(movableComponent : MovableComponent,size : SIMD3<Float>) {
+    required init(movableComponent : MovableComponent,size : SIMD3<Float>,isHost : Bool) {
         self.size = size
         super.init()
         walls.append(contentsOf: createWalls())
@@ -32,9 +32,15 @@ class Arena : Entity,HasAnchoring
         self.piattini.append(createPiattino(movableComponent: movableComponent))
         self.pavimento = createPavimento()
         self.children.append(contentsOf: walls)
-        self.children.append(contentsOf: piattini)
-        self.children.append(dischetto)
         self.children.append(pavimento)
+        if isHost{
+            self.piattini.append(createPiattino(movableComponent: movableComponent))
+            self.children.append(dischetto)
+        }
+        else{
+            self.piattini.append(createPiattinoClient(movableComponent: movableComponent))
+        }
+        self.children.append(contentsOf: piattini)
         
     }
     
@@ -74,7 +80,12 @@ class Arena : Entity,HasAnchoring
     
     func createPiattino(movableComponent: MovableComponent) -> Piattino
     {
-        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto*2, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto*2),SIMD2<Float>(x: -pavimentoSize.z/2 + wallSize[0].z + radiusPiattino + radiusDischetto*2, y: pavimentoSize.z/2 - wallSize[0].z - radiusPiattino - radiusDischetto*2))))
+        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x: -pavimentoSize.z/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: 0))))
+    }
+    
+    func createPiattinoClient(movableComponent: MovableComponent) -> Piattino
+    {
+        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition * SIMD3(x: 1, y: 1, z: -1)),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x:0, y:pavimentoSize.z/2 - wallSize[0].z - radiusPiattino + radiusDischetto))))
     }
     
     func createDisco() -> Dischetto
@@ -121,6 +132,6 @@ class Arena : Entity,HasAnchoring
     var radiusPiattino : Float {get{0.017}}
     var piattinoPosition : SIMD3<Float> {get{ .init(x: 0, y: pavimentoSize.y/2 + radiusPiattino, z: wallPosition[0].z + wallSize[0].z/2 + radiusPiattino*3)}}
     var radiusDischetto : Float {get {0.01}}
-    var dischettoPosition : SIMD3<Float> {get{ .init(x: 0, y: pavimentoSize.y/2 + radiusDischetto, z: wallPosition[2].z - wallSize[2].z/2 - radiusDischetto*4)}}
+    var dischettoPosition : SIMD3<Float> {get{ .init(x: 0, y: pavimentoSize.y/2 + radiusDischetto, z: 0)}}
 }
 

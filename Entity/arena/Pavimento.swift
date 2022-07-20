@@ -20,6 +20,7 @@ class Pavimento : Entity, HasPhysics, HasCollision,HasModel,HasAnchoring
         self.physicsBody = .init(massProperties: .default, material: .generate(friction: 0, restitution: 0), mode: .static)
         self.transform = transformComponent
         self.physicsMotion = .init()
+        self.synchronization = nil
         
         
     }
