@@ -23,7 +23,6 @@
 		E7AE305B287FF8BB00DA66D8 /* FingerDragMultiplayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE305A287FF8BB00DA66D8 /* FingerDragMultiplayerUITests.swift */; };
 		E7AE305D287FF8BB00DA66D8 /* FingerDragMultiplayerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE305C287FF8BB00DA66D8 /* FingerDragMultiplayerUITestsLaunchTests.swift */; };
 		E7AE306A287FF97800DA66D8 /* disco.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E7AE3069287FF97800DA66D8 /* disco.rcproject */; };
-		E7AE306D288007E100DA66D8 /* Gioco.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE306C288007E100DA66D8 /* Gioco.swift */; };
 		E7AE30702880299B00DA66D8 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE306F2880299B00DA66D8 /* Goal.swift */; };
 		E7AE307328804A2F00DA66D8 /* IsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE307228804A2F00DA66D8 /* IsGoal.swift */; };
 		E7AE30752880678F00DA66D8 /* Dischetto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE30742880678F00DA66D8 /* Dischetto.swift */; };
@@ -38,6 +37,7 @@
 		E7DD98892888127C005527A9 /* HasAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD98882888127C005527A9 /* HasAudio.swift */; };
 		E7DD988B288818BF005527A9 /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DD988A288818BF005527A9 /* hit.wav */; };
 		E7DD988D28881B64005527A9 /* goal.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DD988C28881B64005527A9 /* goal.wav */; };
+		E7DD989028883CFC005527A9 /* AudioResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD988F28883CFC005527A9 /* AudioResources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +78,6 @@
 		E7AE305A287FF8BB00DA66D8 /* FingerDragMultiplayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerDragMultiplayerUITests.swift; sourceTree = "<group>"; };
 		E7AE305C287FF8BB00DA66D8 /* FingerDragMultiplayerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerDragMultiplayerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E7AE3069287FF97800DA66D8 /* disco.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = disco.rcproject; sourceTree = SOURCE_ROOT; };
-		E7AE306C288007E100DA66D8 /* Gioco.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gioco.swift; sourceTree = "<group>"; };
 		E7AE306F2880299B00DA66D8 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		E7AE307228804A2F00DA66D8 /* IsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsGoal.swift; sourceTree = "<group>"; };
 		E7AE30742880678F00DA66D8 /* Dischetto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dischetto.swift; sourceTree = "<group>"; };
@@ -93,6 +92,7 @@
 		E7DD98882888127C005527A9 /* HasAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasAudio.swift; sourceTree = "<group>"; };
 		E7DD988A288818BF005527A9 /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
 		E7DD988C28881B64005527A9 /* goal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = goal.wav; sourceTree = "<group>"; };
+		E7DD988F28883CFC005527A9 /* AudioResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +136,7 @@
 		E7AE3031287FF8BA00DA66D8 = {
 			isa = PBXGroup;
 			children = (
+				E7DD988E28883CEC005527A9 /* Utility */,
 				E7DD988C28881B64005527A9 /* goal.wav */,
 				E7DD988A288818BF005527A9 /* hit.wav */,
 				E7D208862887428200F2D434 /* Band.mp3 */,
@@ -168,7 +169,6 @@
 				E7AE3069287FF97800DA66D8 /* disco.rcproject */,
 				E7AE3043287FF8BB00DA66D8 /* Assets.xcassets */,
 				E7AE3045287FF8BB00DA66D8 /* Preview Content */,
-				E7AE306C288007E100DA66D8 /* Gioco.swift */,
 				E75D7ABF2886960300E5A226 /* NearbyService.swift */,
 				E75D7AC02886960300E5A226 /* NearbyServiceDelegate.swift */,
 				E75D7AFA2886F1BC00E5A226 /* identifiablePeer.swift */,
@@ -231,6 +231,14 @@
 				E7DD988428874891005527A9 /* PeerView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E7DD988E28883CEC005527A9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				E7DD988F28883CFC005527A9 /* AudioResources.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +386,7 @@
 				E7AE307928814ADC00DA66D8 /* PointsViewModel.swift in Sources */,
 				E75D7AB52881718700E5A226 /* Piattino.swift in Sources */,
 				E7AE303E287FF8BA00DA66D8 /* AppDelegate.swift in Sources */,
+				E7DD989028883CFC005527A9 /* AudioResources.swift in Sources */,
 				E75D7ABE2884590600E5A226 /* IsBounceable.swift in Sources */,
 				E7AE307D2881587D00DA66D8 /* FixedEntity.swift in Sources */,
 				E7AE3077288068D000DA66D8 /* IsMovable.swift in Sources */,
@@ -385,7 +394,6 @@
 				E7DD98892888127C005527A9 /* HasAudio.swift in Sources */,
 				E75D7ABA2884191600E5A226 /* Pavimento.swift in Sources */,
 				E7AE30702880299B00DA66D8 /* Goal.swift in Sources */,
-				E7AE306D288007E100DA66D8 /* Gioco.swift in Sources */,
 				E75D7AFB2886F1BC00E5A226 /* identifiablePeer.swift in Sources */,
 				E7DD98832887466D005527A9 /* JoinOrHostView.swift in Sources */,
 				E75D7AC12886960300E5A226 /* NearbyService.swift in Sources */,

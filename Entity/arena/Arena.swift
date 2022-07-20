@@ -77,7 +77,7 @@ class Arena : Entity,HasAnchoring
         for i in 0..<wallRotation.count
         {
             
-            wall.append(Wall(transformComponent: Transform(scale: .one, rotation: wallRotation[i], translation: wallPosition[i]), size: wallSize[i], bounceComponent: .init(directionOfBounce: wallBounceDirection[i]),audioComponent: .init(resource: Arena.collisionSound)))
+            wall.append(Wall(transformComponent: Transform(scale: .one, rotation: wallRotation[i], translation: wallPosition[i]), size: wallSize[i], bounceComponent: .init(directionOfBounce: wallBounceDirection[i]),audioComponent: .init(resource: AudioResources.collisionSound)))
         }
         
         return wall
@@ -90,12 +90,12 @@ class Arena : Entity,HasAnchoring
     
     func createPiattino(movableComponent: MovableComponent) -> Piattino
     {
-        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x: -pavimentoSize.z/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: 0))),audioComponent: .init(resource: Arena.collisionSound))
+        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x: -pavimentoSize.z/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: 0))),audioComponent: .init(resource: AudioResources.collisionSound))
     }
     
     func createPiattinoClient(movableComponent: MovableComponent) -> Piattino
     {
-        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition * SIMD3(x: 1, y: 1, z: -1)),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x:0, y:pavimentoSize.z/2 - wallSize[0].z - radiusPiattino + radiusDischetto))),audioComponent: .init(resource: Arena.collisionSound))
+        return Piattino(modelComponent: .init(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)]), movableComponent: movableComponent, tranform: .init(scale: .one , rotation: .init(), translation: piattinoPosition * SIMD3(x: 1, y: 1, z: -1)),restrictionComponent: .init(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x:0, y:pavimentoSize.z/2 - wallSize[0].z - radiusPiattino + radiusDischetto))),audioComponent: .init(resource: AudioResources.collisionSound))
     }
     
     func createDisco() -> Dischetto
@@ -109,7 +109,7 @@ class Arena : Entity,HasAnchoring
         var i = 1
         for position in goalPosition
         {
-            let goal = GoalEntity(goalComponent: .init( nearbyService : nearbyService!,player: i , arena: self,audioResource: Arena.goalSound), mesh: .generateBox(size: goalSize), transform: .init(scale: .one, rotation: .init(), translation: position))
+            let goal = GoalEntity(goalComponent: .init( nearbyService : nearbyService!,player: i , arena: self,audioResource: AudioResources.goalSound), mesh: .generateBox(size: goalSize), transform: .init(scale: .one, rotation: .init(), translation: position))
             result.append(goal)
             i += 1
         }
@@ -180,7 +180,5 @@ class Arena : Entity,HasAnchoring
         }
     }
     
-    static var collisionSound : AudioResource = try! AudioFileResource.load(named: "/hit.wav", in: nil, inputMode: .spatial, loadingStrategy: .preload, shouldLoop: false)
-    static var goalSound : AudioResource = try! AudioFileResource.load(named: "/goal.wav", in: nil, inputMode: .spatial, loadingStrategy: .preload, shouldLoop: false)
 }
 
