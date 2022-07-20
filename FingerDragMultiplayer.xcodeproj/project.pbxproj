@@ -35,6 +35,9 @@
 		E7D208872887428200F2D434 /* Band.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E7D208862887428200F2D434 /* Band.mp3 */; };
 		E7DD98832887466D005527A9 /* JoinOrHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD98822887466D005527A9 /* JoinOrHostView.swift */; };
 		E7DD988528874891005527A9 /* PeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD988428874891005527A9 /* PeerView.swift */; };
+		E7DD98892888127C005527A9 /* HasAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD98882888127C005527A9 /* HasAudio.swift */; };
+		E7DD988B288818BF005527A9 /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DD988A288818BF005527A9 /* hit.wav */; };
+		E7DD988D28881B64005527A9 /* goal.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DD988C28881B64005527A9 /* goal.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,9 @@
 		E7D208862887428200F2D434 /* Band.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Band.mp3; sourceTree = "<group>"; };
 		E7DD98822887466D005527A9 /* JoinOrHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinOrHostView.swift; sourceTree = "<group>"; };
 		E7DD988428874891005527A9 /* PeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerView.swift; sourceTree = "<group>"; };
+		E7DD98882888127C005527A9 /* HasAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasAudio.swift; sourceTree = "<group>"; };
+		E7DD988A288818BF005527A9 /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
+		E7DD988C28881B64005527A9 /* goal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = goal.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,8 @@
 		E7AE3031287FF8BA00DA66D8 = {
 			isa = PBXGroup;
 			children = (
+				E7DD988C28881B64005527A9 /* goal.wav */,
+				E7DD988A288818BF005527A9 /* hit.wav */,
 				E7D208862887428200F2D434 /* Band.mp3 */,
 				E7D208812887411500F2D434 /* Views */,
 				E7AE307828814ADC00DA66D8 /* PointsViewModel.swift */,
@@ -209,6 +217,7 @@
 				E7AE3076288068D000DA66D8 /* IsMovable.swift */,
 				E7AE307A288156C600DA66D8 /* IsRestricted.swift */,
 				E75D7ABD2884590600E5A226 /* IsBounceable.swift */,
+				E7DD98882888127C005527A9 /* HasAudio.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -328,6 +337,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7DD988D28881B64005527A9 /* goal.wav in Resources */,
+				E7DD988B288818BF005527A9 /* hit.wav in Resources */,
 				E7D208872887428200F2D434 /* Band.mp3 in Resources */,
 				E7AE3047287FF8BB00DA66D8 /* Preview Assets.xcassets in Resources */,
 				E7AE3044287FF8BB00DA66D8 /* Assets.xcassets in Resources */,
@@ -371,6 +382,7 @@
 				E7AE307D2881587D00DA66D8 /* FixedEntity.swift in Sources */,
 				E7AE3077288068D000DA66D8 /* IsMovable.swift in Sources */,
 				E7AE306A287FF97800DA66D8 /* disco.rcproject in Sources */,
+				E7DD98892888127C005527A9 /* HasAudio.swift in Sources */,
 				E75D7ABA2884191600E5A226 /* Pavimento.swift in Sources */,
 				E7AE30702880299B00DA66D8 /* Goal.swift in Sources */,
 				E7AE306D288007E100DA66D8 /* Gioco.swift in Sources */,

@@ -9,9 +9,9 @@ import Foundation
 import RealityKit
 
 
-class Piattino : Entity, HasPhysics,HasCollision,HasAnchoring,HasModel,IsMovable,IsRestricted
+class Piattino : Entity, HasPhysics,HasCollision,HasAnchoring,HasModel,IsMovable,IsRestricted,HasAudio
 {
-    required init(modelComponent : ModelComponent,movableComponent : MovableComponent,tranform : Transform,restrictionComponent : RestrictionComponent) {
+    required init(modelComponent : ModelComponent,movableComponent : MovableComponent,tranform : Transform,restrictionComponent : RestrictionComponent,audioComponent : AudioComponent) {
         super.init()
         self.model = modelComponent
         self.physicsBody = PhysicsBodyComponent(massProperties: .default, material: .default, mode: .kinematic)
@@ -19,6 +19,7 @@ class Piattino : Entity, HasPhysics,HasCollision,HasAnchoring,HasModel,IsMovable
         self.collision = .init(shapes: [.generateSphere(radius: 0.017)])
         self.transform = tranform
         self.movable = movableComponent
+        self.audio = audioComponent
         self.restriction = restrictionComponent
         }
     

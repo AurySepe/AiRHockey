@@ -12,8 +12,10 @@ import Combine
 struct GoalComponent : Component
 {
     var goalSubscription : Cancellable?
-    var pointTracker : PointsViewModel
+    var nearbyService : NearbyService
     var player : Int
+    var arena : Arena
+    var audioResource : AudioResource
 
 }
 
@@ -37,17 +39,25 @@ extension IsGoal where Self: HasCollision
         guard let scene = self.scene, let goal = self.goal else {
             return
         }
-        let pointTracker = goal.pointTracker
+        let nearbyService = goal.nearbyService
+        let audio = goal.audioResource
         
         self.goal?.goalSubscription = scene.subscribe(to: CollisionEvents.Began.self, on: self) { event in
-            
-            if goal.player == 1
+            if event.entityB == self.goal?.arena.dischetto
             {
-                pointTracker.punteggioGiocatore1 += 1
-            }
-            else if goal.player == 2
-            {
-                pointTracker.punteggioGiocatore2 += 1
+                self.goal?.arena.resetDischetto()
+                
+                
+                if goal.player == 1
+                {
+                    nearbyService.punteggio1 += 1
+                }
+                else if goal.player == 2
+                {
+                    nearbyService.punteggio2 += 1
+                }
+                nearbyService.send(msg: "\(nearbyService.punteggio1),\(nearbyService.punteggio2)")
+                self.playAudio(audio)
             }
             
         }

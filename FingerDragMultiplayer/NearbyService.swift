@@ -16,6 +16,8 @@ class NearbyService: NSObject, ObservableObject {
     @Published var isConnected : Bool = false
     @Published var isHost : Bool = false
     @Published var isClient : Bool = false
+    @Published var punteggio1 : Int = 0
+    @Published var punteggio2 : Int = 0
     private var clientId : MCPeerID?
     
     private let peerID = MCPeerID( displayName: UIDevice.current.name)
@@ -39,6 +41,7 @@ class NearbyService: NSObject, ObservableObject {
         nearbyServiceAdvertiser.delegate = self
         
         nearbyServiceBrowser.delegate = self
+        nearbyServideDelegate = self
         
     }
     
@@ -144,9 +147,18 @@ extension NearbyService: MCNearbyServiceBrowserDelegate {
     }
     
         
+}
+
+
+extension NearbyService : NearbyServiceDelegate
+{
+    func didReceive(msg: String) {
+        print(msg)
+        let numeriStringati = msg.split(separator: ",")
+        self.punteggio1 = Int(numeriStringati[0])!
+        self.punteggio2 = Int(numeriStringati[1])!
     }
-
-
+}
 
 
 

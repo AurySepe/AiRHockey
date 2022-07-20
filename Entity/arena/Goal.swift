@@ -13,33 +13,30 @@ import Combine
 class GoalEntity : Entity, HasModel, HasAnchoring, HasCollision,IsGoal{
     
     
-    required init(goalComponent : GoalComponent) {
+    required init(goalComponent : GoalComponent,mesh : MeshResource,transform : Transform) {
             super.init()
             
         self.components[CollisionComponent.self] = CollisionComponent(
-                shapes: [.generateBox(size: [0.5,0.5,0.5])],
+            shapes: [.generateConvex(from: mesh)],
                 mode: .trigger,
               filter: .sensor
             )
             
         self.components[ModelComponent.self] = ModelComponent(
-                mesh: .generateBox(size: [0.5,0.5,0.5]),
+            mesh: mesh,
                 materials: [SimpleMaterial(
                     color: .green,
                     isMetallic: false)
                 ]
             )
         self.components[GoalComponent.self] = goalComponent
+        self.transform = transform
         }
     
     required init() {
-        fatalError("init() has not been implemented")
+        super.init()
     }
     
-    convenience init(goalComponent : GoalComponent, position: SIMD3<Float>) {
-            self.init(goalComponent : goalComponent)
-            self.position = position
-    }
     
     
     
