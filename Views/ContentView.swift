@@ -11,7 +11,6 @@ import MultipeerConnectivity
 
 struct ContentView : View {
     
-    @EnvironmentObject var game : Gioco
     @EnvironmentObject var nearbyService : NearbyService
     var body: some View {
         
@@ -38,7 +37,6 @@ struct ContentView : View {
 
 struct ARViewContainer: UIViewRepresentable {
     
-    @EnvironmentObject var game : Gioco
     @EnvironmentObject var nearbyService : NearbyService
     
     func makeUIView(context: Context) -> ARView {
