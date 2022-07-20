@@ -38,12 +38,9 @@
 		E7AE307B288156C600DA66D8 /* IsRestricted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE307A288156C600DA66D8 /* IsRestricted.swift */; };
 		E7AE307D2881587D00DA66D8 /* FixedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE307C2881587D00DA66D8 /* FixedEntity.swift */; };
 		E7D208832887412C00F2D434 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D208822887412C00F2D434 /* MenuView.swift */; };
-		E7D208872887428200F2D434 /* Band.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E7D208862887428200F2D434 /* Band.mp3 */; };
 		E7DD98832887466D005527A9 /* JoinOrHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD98822887466D005527A9 /* JoinOrHostView.swift */; };
 		E7DD988528874891005527A9 /* PeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD988428874891005527A9 /* PeerView.swift */; };
 		E7DD98892888127C005527A9 /* HasAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD98882888127C005527A9 /* HasAudio.swift */; };
-		E7DD988B288818BF005527A9 /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DD988A288818BF005527A9 /* hit.wav */; };
-		E7DD988D28881B64005527A9 /* goal.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DD988C28881B64005527A9 /* goal.wav */; };
 		E7DD989028883CFC005527A9 /* AudioResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD988F28883CFC005527A9 /* AudioResources.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,12 +97,9 @@
 		E7AE307A288156C600DA66D8 /* IsRestricted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsRestricted.swift; sourceTree = "<group>"; };
 		E7AE307C2881587D00DA66D8 /* FixedEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedEntity.swift; sourceTree = "<group>"; };
 		E7D208822887412C00F2D434 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
-		E7D208862887428200F2D434 /* Band.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Band.mp3; sourceTree = "<group>"; };
 		E7DD98822887466D005527A9 /* JoinOrHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinOrHostView.swift; sourceTree = "<group>"; };
 		E7DD988428874891005527A9 /* PeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerView.swift; sourceTree = "<group>"; };
 		E7DD98882888127C005527A9 /* HasAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasAudio.swift; sourceTree = "<group>"; };
-		E7DD988A288818BF005527A9 /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
-		E7DD988C28881B64005527A9 /* goal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = goal.wav; sourceTree = "<group>"; };
 		E7DD988F28883CFC005527A9 /* AudioResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,9 +160,6 @@
 			children = (
 				D0AED6242888413700FA2723 /* Sound */,
 				E7DD988E28883CEC005527A9 /* Utility */,
-				E7DD988C28881B64005527A9 /* goal.wav */,
-				E7DD988A288818BF005527A9 /* hit.wav */,
-				E7D208862887428200F2D434 /* Band.mp3 */,
 				E7D208812887411500F2D434 /* Views */,
 				E7AE307828814ADC00DA66D8 /* PointsViewModel.swift */,
 				E7AE307128804A0600DA66D8 /* Components */,
@@ -374,14 +365,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7DD988D28881B64005527A9 /* goal.wav in Resources */,
 				D0AED6312888420B00FA2723 /* win.mp3 in Resources */,
-				E7DD988B288818BF005527A9 /* hit.wav in Resources */,
 				D0AED62C2888420B00FA2723 /* lost.mp3 in Resources */,
 				D0AED62E2888420B00FA2723 /* score.mp3 in Resources */,
 				D0AED6322888420B00FA2723 /* score-crowd.mp3 in Resources */,
 				D0AED6302888420B00FA2723 /* hit.mp3 in Resources */,
-				E7D208872887428200F2D434 /* Band.mp3 in Resources */,
 				E7AE3047287FF8BB00DA66D8 /* Preview Assets.xcassets in Resources */,
 				D0AED62D2888420B00FA2723 /* background.mp3 in Resources */,
 				D0AED62F2888420B00FA2723 /* setdown.mp3 in Resources */,
