@@ -53,14 +53,49 @@ struct MenuView: View {
             )
         }
         .onAppear(perform: self.startBackgroundMusic)
-        .sheet(isPresented: $showingSingleView, onDismiss: {}, content:
-                {VStack(content: {
-            Image(systemName:"exclamationmark.triangle")
-                .frame(width: 50, height: 50, alignment: .center)
-                .scaleEffect(3, anchor: .center)
-                .foregroundColor(.yellow)
-            Text(MenuView.LANGUAGESDICTS[language]!["working"]!)})})
-        .sheet(isPresented: $showingMultiView, onDismiss: {}, content: {JoinOrHostView(language: $language)})
+        .sheet(isPresented: $showingSingleView, content: {SingleSheet(language: $language)})
+        .sheet(isPresented: $showingMultiView, content: {MultiSheet(language: $language)})
+    }
+    
+    struct SingleSheet: View {
+        @Binding var language : String
+        @Environment(\.presentationMode) var presentationMode
+        var body: some View{
+            VStack{
+                Image(systemName:"exclamationmark.triangle")
+                    .frame(width: 50, height: 50, alignment: .center)
+                    .scaleEffect(3, anchor: .center)
+                    .foregroundColor(.yellow)
+                    .padding(EdgeInsets(
+                        top: 150, leading: 0, bottom: 0, trailing: 0))
+                Text(MenuView.LANGUAGESDICTS[language]!["working"]!)
+                    .padding(EdgeInsets(
+                        top: 25, leading: 0, bottom: 200, trailing: 0))
+                    .font(.system(size: 25))
+                Button(MenuView.LANGUAGESDICTS[language]!["close"]!, action: closeSheet)
+                    .font(.system(size: 20))
+            }
+            .interactiveDismissDisabled()
+        }
+        func closeSheet() {
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    struct MultiSheet: View {
+        @Binding var language : String
+        @Environment(\.presentationMode) var presentationMode
+        var body: some View{
+            VStack{
+                JoinOrHostView(language: $language)
+                Button(MenuView.LANGUAGESDICTS[language]!["close"]!, action: closeSheet)
+                    .font(.system(size: 20))
+            }
+            .interactiveDismissDisabled()
+        }
+        func closeSheet() {
+            presentationMode.wrappedValue.dismiss()
+        }
     }
     
     func startBackgroundMusic() {
@@ -82,7 +117,8 @@ struct MenuView: View {
         "multi":"Multi Player",
         "listLang":"Language",
         "music":"Music",
-        "working":"Work in progress"
+        "working":"Work in progress",
+        "close":"Close"
     ]
     
     static let WORDSIT = [
@@ -90,7 +126,8 @@ struct MenuView: View {
         "multi":"Multi Giocatore",
         "listLang":"Lingua",
         "music":"Musica",
-        "working":"Lavori in corso"
+        "working":"Lavori in corso",
+        "close":"Chiudi"
     ]
     
     static var LANGUAGESDICTS = ["en" : WORDSEN,"it" : WORDSIT]

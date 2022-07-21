@@ -23,7 +23,7 @@ struct ContentView : View {
                 VStack
                 {
                     Spacer()
-                    Text("Giocatore1 : \(pointTracker.punteggioGiocatore1), Giocatore2 : \(pointTracker.punteggioGiocatore2)")
+                    Text("Player1 : \(pointTracker.punteggioGiocatore1), Player2 : \(pointTracker.punteggioGiocatore2)")
                 }
             }
             

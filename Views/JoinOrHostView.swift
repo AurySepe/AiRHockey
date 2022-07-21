@@ -30,7 +30,7 @@ struct JoinOrHostView: View {
                 nearbyService.beginBrowsing()
             })
             .padding(EdgeInsets(
-                top: 50, leading: 0, bottom: 100, trailing: 0))
+                top: 50, leading: 0, bottom: 200, trailing: 0))
             .font(.system(size: 25))
         }
         .sheet(isPresented: $joining, onDismiss: {presentationMode.wrappedValue.dismiss()}, content: {PeerView()})
