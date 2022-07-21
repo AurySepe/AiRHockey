@@ -52,7 +52,16 @@ struct ARViewContainer: UIViewRepresentable {
         arView.debugOptions.update(with: .showPhysics)
 
         arView.scene.anchors.append(arena)
+//        let anchor = AnchorEntity()
+//        let ent : Entity
+//        ent = AssetsRsources.piattino.clone(recursive: true)
+//        anchor.children.append(ent)
+//        arView.scene.anchors.append(anchor)
+//        arView.installGestures(.all, for: ent as! HasCollision)
+        print(arena)
+        
         arena.activateChildren()
+        
        
         arView.scene.synchronizationService = try?
         MultipeerConnectivityService(session: nearbyService.session )

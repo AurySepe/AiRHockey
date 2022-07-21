@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nearbyService.delegateDict = [NearbyService.POINTDELEGATE : pointDelegate,NearbyService.AUDIODELEGATE : audioDelegate]
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView().environmentObject(PointsViewModel()).environmentObject(NearbyService())
+        let contentView = ContentView().environmentObject(pointTracker).environmentObject(nearbyService)
 
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)

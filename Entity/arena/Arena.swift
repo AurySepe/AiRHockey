@@ -31,7 +31,7 @@ class Arena : Entity,HasAnchoring,HasModel
      func initzialize(movableComponent : MovableComponent,isHost : Bool,nearbyService : NearbyService,pointTracker : PointsViewModel) {
         self.nearbyService = nearbyService
         self.tavolo = ModelEntity()
-        self.tavolo!.model = .init(mesh: AssetsRsources.tavolo.model!.mesh, materials: [SimpleMaterial(color: .white, isMetallic: false)])
+         self.tavolo!.model = .init(mesh: AssetsRsources.tavolo.model!.mesh, materials: [SimpleMaterial(color: .lightGray, isMetallic: false)])
         self.tavolo!.collision = nil
         self.tavolo!.scale = .one * 0.005
         walls.append(contentsOf: createWalls())
@@ -103,7 +103,7 @@ class Arena : Entity,HasAnchoring,HasModel
     
     func createPiattino(movableComponent: MovableComponent) -> Piattino
     {
-        let modelComponent = ModelComponent(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)])
+        let modelComponent = ModelComponent(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .orange, isMetallic: false)])
         let transform = Transform(scale: .one , rotation: .init(), translation: piattinoPosition )
         let restrictionComponent = RestrictionComponent(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x: -pavimentoSize.z/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: 0)))
         let audioComponent = AudioComponent(resource: [AudioResources.collisionSound])
@@ -118,7 +118,7 @@ class Arena : Entity,HasAnchoring,HasModel
     func createPiattinoClient(movableComponent: MovableComponent) -> Piattino
     {
         
-        let modelComponent = ModelComponent(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .blue, isMetallic: false)])
+        let modelComponent = ModelComponent(mesh: .generateSphere(radius: radiusPiattino), materials: [SimpleMaterial.init(color: .orange, isMetallic: false)])
         let transform = Transform(scale: .one , rotation: .init(), translation: piattinoPosition * SIMD3<Float>(x: 1, y: 1, z: -1))
         let restrictionComponent = RestrictionComponent(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x:0, y:pavimentoSize.z/2 - wallSize[0].z - radiusPiattino + radiusDischetto)))
         let audioComponent = AudioComponent(resource: [AudioResources.collisionSound])
@@ -197,9 +197,9 @@ class Arena : Entity,HasAnchoring,HasModel
         .init(x: 1, y: 0, z: 0)
     ]}}
     
-    var radiusPiattino : Float {get{0.017}}
+    var radiusPiattino : Float {get{0.030}}
     var piattinoPosition : SIMD3<Float> {get{ .init(x: 0, y: pavimentoPosition.y + pavimentoSize.y/2 + radiusPiattino, z: wallPosition[0].z + wallSize[0].z/2 + radiusPiattino*3)}}
-    var radiusDischetto : Float {get {0.01}}
+    var radiusDischetto : Float {get {0.015}}
     var dischettoPosition : SIMD3<Float> {get{ .init(x: 0, y: pavimentoPosition.y + pavimentoSize.y/2 + radiusDischetto, z: 0)}}
     
     var goalSize : SIMD3<Float> {
