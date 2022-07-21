@@ -143,7 +143,7 @@ class Arena : Entity,HasAnchoring,HasModel
         {
             let goalComponent = GoalComponent(pointTracker: pointTracker, player: i, arena: self)
             let transform = Transform(scale: .one, rotation: .init(), translation: position)
-            let audio = AudioComponent(resource: [AudioResources.collisionSound])
+            let audio = AudioComponent(resource: [AudioResources.goalSoundCheering])
             let network = NetworkComponent(networkSender: nearbyService!)
             
             let goal = GoalEntity(goalComponent: goalComponent, mesh: .generateBox(size: goalSize), transform: transform,audio: audio,network: network)

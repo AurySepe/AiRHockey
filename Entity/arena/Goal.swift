@@ -16,6 +16,11 @@ class GoalEntity : Entity, HasModel, HasAnchoring, HasCollision,IsGoal, HasAudio
     required init(goalComponent : GoalComponent,mesh : MeshResource,transform : Transform,audio : AudioComponent,network : NetworkComponent) {
             super.init()
             
+        var material = SimpleMaterial()
+        material.baseColor = MaterialColorParameter.color(
+            UIColor(red: 0, green: 1, blue: 0, alpha: 0.60)
+          )
+        self.model = ModelComponent(mesh: mesh, materials: [material])
         self.components[CollisionComponent.self] = CollisionComponent(
             shapes: [.generateConvex(from: mesh)],
                 mode: .trigger,

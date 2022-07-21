@@ -49,7 +49,7 @@ struct ARViewContainer: UIViewRepresentable {
         let arView = ARView(frame: .zero)
         let arena = Arena(transformComponent: .init(scale: .one, rotation: .init(), translation: .zero ), movableComponent: .init(view: arView),isHost: nearbyService.isHost,nearbyService: nearbyService,pointTracker : pointTracker)
 
-        arView.debugOptions.update(with: .showPhysics)
+//        arView.debugOptions.update(with: .showPhysics)
 
         arView.scene.anchors.append(arena)
 //        let anchor = AnchorEntity()

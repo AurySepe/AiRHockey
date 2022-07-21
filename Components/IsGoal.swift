@@ -58,7 +58,7 @@ extension IsGoal where Self: HasCollision & HasAudio & HasNetwork
                 }
                 self.playAudio(audioResource)
                 nearbyService.send(msg: "\(NearbyService.POINTDELEGATE)#\(pointTracker.punteggioGiocatore1),\(pointTracker.punteggioGiocatore2)")
-                nearbyService.send(msg: "\(NearbyService.AUDIODELEGATE)#\(AudioResources.GOALSOUND)")
+                nearbyService.send(msg: "\(NearbyService.AUDIODELEGATE)#\(AudioResources.GOALSOUNDCHEERING)")
             }
             
         }
