@@ -13,10 +13,6 @@ struct MenuView: View {
     @State var showingSingleView : Bool = false
     @State var showingMultiView : Bool = false
     @State var language = "en"
-    @State var single: String = "Single Player"
-    @State var multi: String = "Multi Player"
-    @State var lang: String = "Language"
-    @State var music: String = "Music"
     @ObservedObject var musicM = musicModel()
     
     var body: some View {
@@ -31,10 +27,9 @@ struct MenuView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.orange)
                 .padding(EdgeInsets(
-                    top: 100, leading: 0, bottom: 0, trailing: 0))
-                .font(
-                    .system(size: 25))
-                Button(self.multi, action:{
+                    top: 150, leading: 0, bottom: 0, trailing: 0))
+                .font(.system(size: 25))
+                Button(MenuView.LANGUAGESDICTS[language]!["multi"]!, action:{
                     showingMultiView.toggle()})
                 .buttonStyle(.borderedProminent)
                 .tint(.cyan)
@@ -45,16 +40,16 @@ struct MenuView: View {
 
             
             .navigationBarItems(trailing: Menu() {
-                Menu(self.lang) {
+                Menu(MenuView.LANGUAGESDICTS[language]!["listLang"]!) {
                     Button("English", action: {
-                    language = "en"})
+                        language = "en"})
                     Button("Italiano", action: {
                         language = "it"})
                 }
                 Toggle(isOn: Binding<Bool>(
                     get: { self.musicM.mOn },
                     set: { self.musicM.mOn = $0; self.doMusic() })) {
-                        Text(self.music)
+                        Text(MenuView.LANGUAGESDICTS[language]!["music"]!)
                     }.onAppear(perform: self.startBackgroundMusic)
             } label:{
                 Label(" ", systemImage: "gear")
@@ -64,42 +59,15 @@ struct MenuView: View {
             )
             
         }
-        
-
         .onAppear(perform: self.startBackgroundMusic)
-        .sheet(isPresented: $showingSingleView, onDismiss: {}, content: {})
-        .sheet(isPresented: $showingMultiView, onDismiss: {}, content: {JoinOrHostView()})
-        
-        
-        
-    }
-    
-    func lang(selected:String){
-        switch selected{
-        case "it":
-            single = "Giocatore Singolo"
-            multi = "Multi Giocatore"
-            lang = "Lingua"
-            music = "Musica"
-        default:
-            single = "Single Player"
-            multi = "Multi Player"
-            lang = "Language"
-            music = "Music"
-        }
-    }
-    
-    func single(language : String) -> String
-    {
-        if language == "en"
-        {
-            return "Single Player"
-            
-        }
-        else
-        {
-            return "Giocatore Singolo"
-        }
+        .sheet(isPresented: $showingSingleView, onDismiss: {}, content:
+                {VStack(content: {
+            Image(systemName:"exclamationmark.triangle")
+                .frame(width: 50, height: 50, alignment: .center)
+                .scaleEffect(3, anchor: .center)
+                .foregroundColor(.yellow)
+            Text(MenuView.LANGUAGESDICTS[language]!["working"]!)})})
+        .sheet(isPresented: $showingMultiView, onDismiss: {}, content: {JoinOrHostView(language: $language)})
     }
     
     func startBackgroundMusic() {
@@ -118,13 +86,18 @@ struct MenuView: View {
     
     static let WORDSEN = [
         "single":"Single Player",
-        "multi":"Multi Player"
-
+        "multi":"Multi Player",
+        "listLang":"Language",
+        "music":"Music",
+        "working":"Work in progress"
     ]
+    
     static let WORDSIT = [
         "single":"Giocatore Singolo",
-        "multi":"Giocatore Multiplo"
-
+        "multi":"Multi Giocatore",
+        "listLang":"Lingua",
+        "music":"Musica",
+        "working":"Lavori in corso"
     ]
     
     static var LANGUAGESDICTS = ["en" : WORDSEN,"it" : WORDSIT]
@@ -156,7 +129,6 @@ class musicModel: ObservableObject {
             }
         }
     }
-    
 }
 
 struct MenuView_Previews: PreviewProvider {
