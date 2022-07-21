@@ -26,6 +26,6 @@ extension IsMovable
     func installMovement()
     {
         guard let movable = self.movable else {return}
-        movable.view.installGestures(for: self)
+        movable.view.installGestures([.translation], for: self)
     }
 }

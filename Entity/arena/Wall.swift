@@ -15,9 +15,10 @@ class Wall: Entity, HasCollision,HasModel,HasAnchoring,IsBounceable,HasAudio,Has
     
     required init(transformComponent : Transform,size : SIMD3<Float>,bounceComponent: BounceComponent,audioComponent : AudioComponent,network : NetworkComponent,hitSound : HitSoundComponent) {
         super.init()
-        self.model = .init(mesh: .generateBox(size: size), materials: [SimpleMaterial(color: .white, isMetallic: false)] )
+        self.model = nil
+//        self.model = .init(mesh: .generateBox(size: size), materials: [SimpleMaterial(color: .blue, isMetallic: false)])
 //        self.physicsBody = .init(massProperties: .default, material: .generate(friction: 0, restitution: 1), mode: .static)
-        self.generateCollisionShapes(recursive: true)
+        self.collision = .init(shapes:[.generateBox(size: size)] )
         self.transform = transformComponent
 //        self.physicsMotion = .init()
         self.bounce = bounceComponent

@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 import MultipeerConnectivity
+import Combine
 
 struct ContentView : View {
     
@@ -40,12 +41,13 @@ struct ARViewContainer: UIViewRepresentable {
     
     @EnvironmentObject var nearbyService : NearbyService
     @EnvironmentObject var pointTracker : PointsViewModel
+    static var s : Cancellable?
     
     func makeUIView(context: Context) -> ARView {
         GoalComponent.registerComponent()
         
         let arView = ARView(frame: .zero)
-        let arena = Arena(transformComponent: .init(scale: .one, rotation: .init(), translation: .init(x: 0, y: 0, z: 0)), movableComponent: .init(view: arView),size: .init(x: 0.3, y: 0.1, z: 0.6),isHost: nearbyService.isHost,nearbyService: nearbyService,pointTracker : pointTracker)
+        let arena = Arena(transformComponent: .init(scale: .one, rotation: .init(), translation: .zero ), movableComponent: .init(view: arView),isHost: nearbyService.isHost,nearbyService: nearbyService,pointTracker : pointTracker)
 
         arView.debugOptions.update(with: .showPhysics)
 
@@ -54,16 +56,14 @@ struct ARViewContainer: UIViewRepresentable {
        
         arView.scene.synchronizationService = try?
         MultipeerConnectivityService(session: nearbyService.session )
+        print(arena.dischetto.transform.translation)
         
 
-////        game.prova = arView.scene.subscribe(to: SceneEvents.Update.self) { event in
-////            timer += Float(event.deltaTime)
-////            if timer >= 3
-////            {
-////                arena.dischetto.physicsBody?.mode = .dynamic
-////            }
-            
+//        ARViewContainer.s = arView.scene.subscribe(to: SceneEvents.Update.self) { event in
 //            
+//            print("disco \(arena.dischetto.transform.translation)")
+//            print(arena.pavimento.transform.translation)
+////            
 //        }
         return arView
     }
