@@ -80,7 +80,7 @@ struct MenuView: View {
     
     func startBackgroundMusic() {
         if self.musicM.mOn {
-            self.musicM.playSoundBand(sound: "Band", type: "mp3")
+            self.musicM.playSoundBand(sound: "background", type: "mp3")
         }
     }
     
