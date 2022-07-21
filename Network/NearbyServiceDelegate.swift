@@ -9,5 +9,4 @@ import Foundation
 
 protocol NearbyServiceDelegate {
     func didReceive(msg: String)
-    func send(msg: String)
 }

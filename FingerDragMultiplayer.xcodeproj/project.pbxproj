@@ -30,6 +30,10 @@
 		E7AE307928814ADC00DA66D8 /* PointsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE307828814ADC00DA66D8 /* PointsViewModel.swift */; };
 		E7AE307B288156C600DA66D8 /* IsRestricted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE307A288156C600DA66D8 /* IsRestricted.swift */; };
 		E7AE307D2881587D00DA66D8 /* FixedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE307C2881587D00DA66D8 /* FixedEntity.swift */; };
+		E7D02262288892C1005B5ADB /* SoundDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D02261288892C1005B5ADB /* SoundDelegate.swift */; };
+		E7D022642888936C005B5ADB /* NetworkSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D022632888936C005B5ADB /* NetworkSender.swift */; };
+		E7D0226628889D73005B5ADB /* Assets.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E7D0226528889D73005B5ADB /* Assets.rcproject */; };
+		E7D0226828889D9F005B5ADB /* AssetsResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0226728889D9F005B5ADB /* AssetsResources.swift */; };
 		E7D208832887412C00F2D434 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D208822887412C00F2D434 /* MenuView.swift */; };
 		E7DD98832887466D005527A9 /* JoinOrHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD98822887466D005527A9 /* JoinOrHostView.swift */; };
 		E7DD988528874891005527A9 /* PeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD988428874891005527A9 /* PeerView.swift */; };
@@ -92,6 +96,10 @@
 		E7AE307828814ADC00DA66D8 /* PointsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsViewModel.swift; sourceTree = "<group>"; };
 		E7AE307A288156C600DA66D8 /* IsRestricted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsRestricted.swift; sourceTree = "<group>"; };
 		E7AE307C2881587D00DA66D8 /* FixedEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedEntity.swift; sourceTree = "<group>"; };
+		E7D02261288892C1005B5ADB /* SoundDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDelegate.swift; sourceTree = "<group>"; };
+		E7D022632888936C005B5ADB /* NetworkSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSender.swift; sourceTree = "<group>"; };
+		E7D0226528889D73005B5ADB /* Assets.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Assets.rcproject; sourceTree = "<group>"; };
+		E7D0226728889D9F005B5ADB /* AssetsResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsResources.swift; sourceTree = "<group>"; };
 		E7D208822887412C00F2D434 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		E7DD98822887466D005527A9 /* JoinOrHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinOrHostView.swift; sourceTree = "<group>"; };
 		E7DD988428874891005527A9 /* PeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerView.swift; sourceTree = "<group>"; };
@@ -150,6 +158,7 @@
 		E7AE3031287FF8BA00DA66D8 = {
 			isa = PBXGroup;
 			children = (
+				E7D0226528889D73005B5ADB /* Assets.rcproject */,
 				E7DD98AC28885A18005527A9 /* Sound */,
 				E7DD989328884199005527A9 /* Network */,
 				E7DD988E28883CEC005527A9 /* Utility */,
@@ -249,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				E7DD988F28883CFC005527A9 /* AudioResources.swift */,
+				E7D0226728889D9F005B5ADB /* AssetsResources.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -260,6 +270,8 @@
 				E75D7AC02886960300E5A226 /* NearbyServiceDelegate.swift */,
 				E75D7AFA2886F1BC00E5A226 /* identifiablePeer.swift */,
 				E7DD989728884F1D005527A9 /* PointDelegate.swift */,
+				E7D02261288892C1005B5ADB /* SoundDelegate.swift */,
+				E7D022632888936C005B5ADB /* NetworkSender.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -267,8 +279,8 @@
 		E7DD98AC28885A18005527A9 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
-				E7DD98AD28885A18005527A9 /* score.mp3 */,
 				E7DD98AE28885A18005527A9 /* hit.mp3 */,
+				E7DD98AD28885A18005527A9 /* score.mp3 */,
 				E7DD98AF28885A18005527A9 /* win.mp3 */,
 				E7DD98B028885A18005527A9 /* lost.mp3 */,
 				E7DD98B128885A18005527A9 /* setdown.mp3 */,
@@ -416,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7AE307B288156C600DA66D8 /* IsRestricted.swift in Sources */,
+				E7D022642888936C005B5ADB /* NetworkSender.swift in Sources */,
 				E75D7AC22886960300E5A226 /* NearbyServiceDelegate.swift in Sources */,
 				E7AE30752880678F00DA66D8 /* Dischetto.swift in Sources */,
 				E7DD989828884F1D005527A9 /* PointDelegate.swift in Sources */,
@@ -424,6 +437,7 @@
 				E7AE307328804A2F00DA66D8 /* IsGoal.swift in Sources */,
 				E7D208832887412C00F2D434 /* MenuView.swift in Sources */,
 				E7AE3040287FF8BA00DA66D8 /* ContentView.swift in Sources */,
+				E7D0226628889D73005B5ADB /* Assets.rcproject in Sources */,
 				E75D7AB72884147A00E5A226 /* Wall.swift in Sources */,
 				E7AE307928814ADC00DA66D8 /* PointsViewModel.swift in Sources */,
 				E75D7AB52881718700E5A226 /* Piattino.swift in Sources */,
@@ -435,10 +449,12 @@
 				E7AE306A287FF97800DA66D8 /* disco.rcproject in Sources */,
 				E7DD9896288845F9005527A9 /* HasHitSound.swift in Sources */,
 				E7DD989228884107005527A9 /* HasNetwork.swift in Sources */,
+				E7D0226828889D9F005B5ADB /* AssetsResources.swift in Sources */,
 				E7DD98892888127C005527A9 /* HasAudio.swift in Sources */,
 				E75D7ABA2884191600E5A226 /* Pavimento.swift in Sources */,
 				E7AE30702880299B00DA66D8 /* Goal.swift in Sources */,
 				E75D7AFB2886F1BC00E5A226 /* identifiablePeer.swift in Sources */,
+				E7D02262288892C1005B5ADB /* SoundDelegate.swift in Sources */,
 				E7DD98832887466D005527A9 /* JoinOrHostView.swift in Sources */,
 				E75D7AC12886960300E5A226 /* NearbyService.swift in Sources */,
 			);

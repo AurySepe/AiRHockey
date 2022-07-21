@@ -27,9 +27,4 @@ class PointDelegate : NearbyServiceDelegate
         pointTracker.punteggioGiocatore2 = Int(numeriStringati[1])!
     }
     
-    func send(msg: String) {
-        if let data = msg.data(using: .utf8), session.connectedPeers.count > 0 {
-            try? session.send(data, toPeers: session.connectedPeers, with: .reliable)
-        }
-    }
 }

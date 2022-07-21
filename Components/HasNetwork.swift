@@ -14,7 +14,7 @@ import Combine
 
 struct NetworkComponent : Component
 {
-    var networkDelegate : NearbyServiceDelegate
+    var networkSender : NetworkSender
 
 }
 

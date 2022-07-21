@@ -38,7 +38,7 @@ extension IsGoal where Self: HasCollision & HasAudio & HasNetwork
         guard let scene = self.scene, let goal = self.goal , let audio = self.audio , let network = self.network else {
             return
         }
-        let nearbyService = network.networkDelegate
+        let nearbyService = network.networkSender
         let audioResource = audio.resource[0]
         let pointTracker = goal.pointTracker
         
@@ -58,6 +58,7 @@ extension IsGoal where Self: HasCollision & HasAudio & HasNetwork
                 }
                 self.playAudio(audioResource)
                 nearbyService.send(msg: "\(NearbyService.POINTDELEGATE)#\(pointTracker.punteggioGiocatore1),\(pointTracker.punteggioGiocatore2)")
+                nearbyService.send(msg: "\(NearbyService.AUDIODELEGATE)#\(AudioResources.GOALSOUND)")
             }
             
         }

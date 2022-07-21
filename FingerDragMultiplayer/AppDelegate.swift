@@ -17,8 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let pointTracker = PointsViewModel()
         let nearbyService = NearbyService()
+        
         let pointDelegate = PointDelegate(session: nearbyService.session, pointTracker: pointTracker)
-        nearbyService.delegateDict = [NearbyService.POINTDELEGATE : pointDelegate]
+        let audioDelegate = SoundDelegate(session: nearbyService.session)
+        nearbyService.delegateDict = [NearbyService.POINTDELEGATE : pointDelegate,NearbyService.AUDIODELEGATE : audioDelegate]
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView().environmentObject(PointsViewModel()).environmentObject(NearbyService())

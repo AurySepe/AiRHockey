@@ -36,7 +36,7 @@ extension HasHitSound where Self: HasCollision & HasAudio & HasNetwork
         guard let scene = self.scene, let audio = self.audio , let network = self.network else {
             return
         }
-        let nearbyService = network.networkDelegate
+        let nearbyService = network.networkSender
         let audioResource = audio.resource[0]
         
         self.hitSound?.hitSoundSubscription = scene.subscribe(to: CollisionEvents.Began.self, on: self) { event in
@@ -45,7 +45,7 @@ extension HasHitSound where Self: HasCollision & HasAudio & HasNetwork
             {
                 
                 self.playAudio(audioResource)
-                nearbyService.send(msg: "\(NearbyService.AUDIODELEGATE)#")
+                nearbyService.send(msg: "\(NearbyService.AUDIODELEGATE)#\(AudioResources.COLLISIONSOUND)")
             }
             
         }

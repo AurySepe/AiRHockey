@@ -86,7 +86,7 @@ struct MenuView: View {
     
     func doMusic() {
         if self.musicM.mOn {
-            self.musicM.playSoundBand(sound: "Band", type: "mp3")
+            self.musicM.playSoundBand(sound: "background", type: "mp3")
         } else {
             self.musicM.audioPlayerBand?.pause()
         }

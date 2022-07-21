@@ -8,7 +8,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class NearbyService: NSObject, ObservableObject {
+class NearbyService: NSObject, ObservableObject,NetworkSender {
     
     var nearbyServiceDelegate : NearbyServiceDelegate?
     private var serviceType = "gt-nearby"

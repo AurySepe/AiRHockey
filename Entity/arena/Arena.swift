@@ -80,7 +80,7 @@ class Arena : Entity,HasAnchoring
             let transform = Transform(scale: .one, rotation: wallRotation[i], translation: wallPosition[i])
             let bounceComponent = BounceComponent(directionOfBounce: wallBounceDirection[i])
             let audioComponent = AudioComponent(resource: [AudioResources.collisionSound])
-            let networkComponent = NetworkComponent(networkDelegate: nearbyService!)
+            let networkComponent = NetworkComponent(networkSender: nearbyService!)
             let hitSoundComponent = HitSoundComponent()
             
             let wall = Wall(transformComponent: transform, size: wallSize[i], bounceComponent:bounceComponent ,audioComponent: audioComponent,network: networkComponent,hitSound: hitSoundComponent)
@@ -93,7 +93,7 @@ class Arena : Entity,HasAnchoring
     
     func createPavimento() -> Pavimento
     {
-        Pavimento(transformComponent: .init(scale: .one, rotation: .init(), translation: .zero),size: pavimentoSize )
+        Pavimento(transformComponent: .init(scale: .one , rotation: .init(), translation: .zero),size: pavimentoSize )
     }
     
     func createPiattino(movableComponent: MovableComponent) -> Piattino
@@ -102,7 +102,7 @@ class Arena : Entity,HasAnchoring
         let transform = Transform(scale: .one , rotation: .init(), translation: piattinoPosition)
         let restrictionComponent = RestrictionComponent(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x: -pavimentoSize.z/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: 0)))
         let audioComponent = AudioComponent(resource: [AudioResources.collisionSound])
-        let networkComponent = NetworkComponent(networkDelegate: nearbyService!)
+        let networkComponent = NetworkComponent(networkSender: nearbyService!)
         let hitSoundComponent = HitSoundComponent()
         
         let piattino = Piattino(modelComponent: modelComponent, movableComponent: movableComponent, tranform: transform,restrictionComponent: restrictionComponent,audioComponent: audioComponent,network: networkComponent,hitSound: hitSoundComponent)
@@ -117,7 +117,7 @@ class Arena : Entity,HasAnchoring
         let transform = Transform(scale: .one , rotation: .init(), translation: piattinoPosition * SIMD3<Float>(x: 1, y: 1, z: -1))
         let restrictionComponent = RestrictionComponent(box: (SIMD2<Float>(x: -pavimentoSize.x/2 + wallSize[0].z + radiusPiattino + radiusDischetto, y: pavimentoSize.x/2 - wallSize[0].z - radiusPiattino - radiusDischetto),SIMD2<Float>(x:0, y:pavimentoSize.z/2 - wallSize[0].z - radiusPiattino + radiusDischetto)))
         let audioComponent = AudioComponent(resource: [AudioResources.collisionSound])
-        let networkComponent = NetworkComponent(networkDelegate: nearbyService!)
+        let networkComponent = NetworkComponent(networkSender: nearbyService!)
         let hitSoundComponent = HitSoundComponent()
         
         let piattino = Piattino(modelComponent: modelComponent, movableComponent: movableComponent, tranform: transform,restrictionComponent: restrictionComponent,audioComponent: audioComponent,network: networkComponent,hitSound: hitSoundComponent)
@@ -139,7 +139,7 @@ class Arena : Entity,HasAnchoring
             let goalComponent = GoalComponent(pointTracker: pointTracker, player: i, arena: self)
             let transform = Transform(scale: .one, rotation: .init(), translation: position)
             let audio = AudioComponent(resource: [AudioResources.collisionSound])
-            let network = NetworkComponent(networkDelegate: nearbyService!)
+            let network = NetworkComponent(networkSender: nearbyService!)
             
             let goal = GoalEntity(goalComponent: goalComponent, mesh: .generateBox(size: goalSize), transform: transform,audio: audio,network: network)
             result.append(goal)
