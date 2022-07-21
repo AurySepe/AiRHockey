@@ -40,16 +40,16 @@ extension IsRestricted
         guard let scene = self.scene else {
             return
         }
-        self.restriction?.oldPosition = self.position
+        self.restriction?.oldPosition = self.transform.translation
         
         self.restriction?.eventSubscription = scene.subscribe(to: SceneEvents.Update.self) { event in
             if self.isValid()
             {
-                self.restriction?.oldPosition = self.position
+                self.restriction?.oldPosition = self.transform.translation
             } else
             {
 //                print("nuova posizione :\(self.position) non è valida, ritorno alla posizione \(String(describing: self.restriction!.oldPosition))")
-                self.position = self.restriction!.oldPosition!
+                self.transform.translation = self.restriction!.oldPosition!
             }
             
         }

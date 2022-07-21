@@ -22,13 +22,14 @@ class GoalEntity : Entity, HasModel, HasAnchoring, HasCollision,IsGoal, HasAudio
               filter: .sensor
             )
             
-        self.components[ModelComponent.self] = ModelComponent(
-            mesh: mesh,
-                materials: [SimpleMaterial(
-                    color: .green,
-                    isMetallic: false)
-                ]
-            )
+//        self.components[ModelComponent.self] = ModelComponent(
+//            mesh: mesh,
+//                materials: [SimpleMaterial(
+//                    color: .green,
+//                    isMetallic: false)
+//                ]
+//            )
+        
         self.components[GoalComponent.self] = goalComponent
         self.audio = audio
         self.network = network
