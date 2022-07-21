@@ -12,6 +12,7 @@ import AVFoundation
 struct MenuView: View {
     @State var showingSingleView : Bool = false
     @State var showingMultiView : Bool = false
+    @State var language = "en"
     @State var single: String = "Single Player"
     @State var multi: String = "Multi Player"
     @State var lang: String = "Language"
@@ -26,7 +27,7 @@ struct MenuView: View {
                     .bold()
                     .font(
                         .system(size: 50))
-                Button(self.single, action:{
+                Button(MenuView.LANGUAGESDICTS[language]!["single"]!, action:{
                     showingSingleView.toggle()})
                 .padding(EdgeInsets(
                     top: 150, leading: 0, bottom: 0, trailing: 0))
@@ -42,9 +43,9 @@ struct MenuView: View {
             .navigationBarItems(trailing: Menu() {
                 Menu(self.lang) {
                     Button("English", action: {
-                        lang(selected:"en")})
+                    language = "en"})
                     Button("Italiano", action: {
-                        lang(selected:"it")})
+                        language = "it"})
                 }
                 Toggle(isOn: Binding<Bool>(
                     get: { self.musicM.mOn },
@@ -78,6 +79,19 @@ struct MenuView: View {
         }
     }
     
+    func single(language : String) -> String
+    {
+        if language == "en"
+        {
+            return "Single Player"
+            
+        }
+        else
+        {
+            return "Giocatore Singolo"
+        }
+    }
+    
     func startBackgroundMusic() {
         if self.musicM.mOn {
             self.musicM.playSoundBand(sound: "background", type: "mp3")
@@ -91,6 +105,19 @@ struct MenuView: View {
             self.musicM.audioPlayerBand?.pause()
         }
     }
+    
+    static let WORDSEN = [
+        "single":"Single Player",
+        "multi":"Multi Player"
+
+    ]
+    static let WORDSIT = [
+        "single":"Giocatore Singolo",
+        "multi":"Giocatore Multiplo"
+
+    ]
+    
+    static var LANGUAGESDICTS = ["en" : WORDSEN,"it" : WORDSIT]
 }
 
 class musicModel: ObservableObject {
@@ -119,6 +146,7 @@ class musicModel: ObservableObject {
             }
         }
     }
+    
 }
 
 struct MenuView_Previews: PreviewProvider {
