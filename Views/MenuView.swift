@@ -20,25 +20,29 @@ struct MenuView: View {
     @ObservedObject var musicM = musicModel()
     
     var body: some View {
+        
         NavigationView {
-            
             VStack(content: {
-                Text("Air Hockey AR")
-                    .bold()
-                    .font(
-                        .system(size: 50))
+                Image(uiImage: UIImage(named: "logo.png")!)
+                    .resizable()
+                    .frame(width: 300, height: 150, alignment: .center)
                 Button(MenuView.LANGUAGESDICTS[language]!["single"]!, action:{
                     showingSingleView.toggle()})
+                .buttonStyle(.borderedProminent)
+                .tint(.orange)
                 .padding(EdgeInsets(
-                    top: 150, leading: 0, bottom: 0, trailing: 0))
+                    top: 100, leading: 0, bottom: 0, trailing: 0))
                 .font(
                     .system(size: 25))
                 Button(self.multi, action:{
                     showingMultiView.toggle()})
+                .buttonStyle(.borderedProminent)
+                .tint(.cyan)
                 .padding(EdgeInsets(
                     top: 50, leading: 0, bottom: 100, trailing: 0))
                 .font(.system(size: 25))
             })
+
             
             .navigationBarItems(trailing: Menu() {
                 Menu(self.lang) {
@@ -58,10 +62,16 @@ struct MenuView: View {
                     .scaleEffect(2, anchor: .center)
             }
             )
+            
         }
+        
+
         .onAppear(perform: self.startBackgroundMusic)
         .sheet(isPresented: $showingSingleView, onDismiss: {}, content: {})
         .sheet(isPresented: $showingMultiView, onDismiss: {}, content: {JoinOrHostView()})
+        
+        
+        
     }
     
     func lang(selected:String){

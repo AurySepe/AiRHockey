@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D095797B288958C2009850C6 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D095797A288958C2009850C6 /* logo.png */; };
 		E75D7AB52881718700E5A226 /* Piattino.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D7AB42881718700E5A226 /* Piattino.swift */; };
 		E75D7AB72884147A00E5A226 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D7AB62884147A00E5A226 /* Wall.swift */; };
 		E75D7ABA2884191600E5A226 /* Pavimento.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D7AB92884191600E5A226 /* Pavimento.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D095797A288958C2009850C6 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../../Downloads/logo.png; sourceTree = "<group>"; };
 		E75D7AB42881718700E5A226 /* Piattino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piattino.swift; sourceTree = "<group>"; };
 		E75D7AB62884147A00E5A226 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		E75D7AB92884191600E5A226 /* Pavimento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pavimento.swift; sourceTree = "<group>"; };
@@ -142,6 +144,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D095797928895890009850C6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D095797A288958C2009850C6 /* logo.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		E75D7AB8288418B700E5A226 /* arena */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +168,7 @@
 		E7AE3031287FF8BA00DA66D8 = {
 			isa = PBXGroup;
 			children = (
+				D095797928895890009850C6 /* Images */,
 				E7D0226528889D73005B5ADB /* Assets.rcproject */,
 				E7DD98AC28885A18005527A9 /* Sound */,
 				E7DD989328884199005527A9 /* Network */,
@@ -400,6 +411,7 @@
 				E7AE3044287FF8BB00DA66D8 /* Assets.xcassets in Resources */,
 				E7DD98BA28885A18005527A9 /* score-crowd.mp3 in Resources */,
 				E7DD98B628885A18005527A9 /* win.mp3 in Resources */,
+				D095797B288958C2009850C6 /* logo.png in Resources */,
 				E7DD98B528885A18005527A9 /* hit.mp3 in Resources */,
 				E7DD98B728885A18005527A9 /* lost.mp3 in Resources */,
 				E7DD98B428885A18005527A9 /* score.mp3 in Resources */,
